@@ -5,7 +5,6 @@ public class MonthOfCalendar {
     private final Month month;
     private final int countDays;
 
-
     public MonthOfCalendar(Day day, Month month, int countDays) {
         this.day = day;
         this.month = month;

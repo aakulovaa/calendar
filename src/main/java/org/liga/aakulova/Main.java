@@ -1,9 +1,9 @@
 package org.liga.aakulova;
 
 
-import org.liga.aakulova.domain.Calendar;
-import org.liga.aakulova.domain.MonthOfCalendar;
 import org.liga.aakulova.infrastructure.CalendarCalculator;
+import org.liga.aakulova.presentation.CalendarDisplay;
+import org.liga.aakulova.presentation.CalendarDisplayInterface;
 import org.liga.aakulova.service.CalendarService;
 import org.liga.aakulova.service.CalendarServiceImpl;
 
@@ -14,20 +14,33 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         CalendarService calendarService = new CalendarServiceImpl(new CalendarCalculator());
+        CalendarDisplayInterface displayCalendar = new CalendarDisplay();
 
-        System.out.println("Введите год: ");
+        boolean isRunning = true;
+        while (isRunning){
+            System.out.println("1. Вывести календарь введенного года");
+            System.out.println("2. Завершить программу");
 
-        int year = scanner.nextInt();
-        
-        Calendar calendar = calendarService.createCalendar(year);
+            int choice = scanner.nextInt();
+            switch (choice){
+                case 1 -> {
+                    System.out.println("Введите год: ");
 
-        System.out.println("Введенный год: " + calendar.getYear());
-        System.out.println("Количество месяцев: " + calendar.getMonths().size());
+                    int year = scanner.nextInt();
 
-        System.out.println("Месяца: ");
-        for (MonthOfCalendar month : calendar.getMonths()){
-            System.out.println(month.getMonth().getMonthName());
+                    if (year < 1600){
+                        System.out.println("Вводимый год должен быть после 1600!\n");
+                        break;
+                    }
+
+                    displayCalendar.display(calendarService.createCalendar(year));
+                }
+                case 2 -> {
+                    System.out.println("Программа завершена");
+                    isRunning = false;
+                }
+            }
         }
-
+        scanner.close();
     }
 }
