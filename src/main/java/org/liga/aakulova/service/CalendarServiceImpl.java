@@ -25,7 +25,6 @@ public class CalendarServiceImpl implements CalendarService{
                     new MonthOfCalendar(firstDayOfMonth, month, countOfDays)
             );
         }
-
         return new Calendar(year, months);
     }
 }

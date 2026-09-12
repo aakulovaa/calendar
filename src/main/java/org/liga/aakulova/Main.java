@@ -1,7 +1,9 @@
 package org.liga.aakulova;
 
 
-import org.liga.aakulova.domain.*;
+import org.liga.aakulova.domain.Calendar;
+import org.liga.aakulova.domain.MonthOfCalendar;
+import org.liga.aakulova.infrastructure.CalendarCalculator;
 import org.liga.aakulova.service.CalendarService;
 import org.liga.aakulova.service.CalendarServiceImpl;
 
@@ -11,19 +13,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        CalendarInterface calendarInterface = new CalendarInterface() {
-            @Override
-            public int getDaysCount(int year, Month month) {
-                return 30;
-            }
-
-            @Override
-            public Day getFirstDayOfWeek(int year, Month month) {
-                return Day.MONDAY;
-            }
-        };
-
-        CalendarService calendarService = new CalendarServiceImpl(calendarInterface);
+        CalendarService calendarService = new CalendarServiceImpl(new CalendarCalculator());
 
         System.out.println("Введите год: ");
 
