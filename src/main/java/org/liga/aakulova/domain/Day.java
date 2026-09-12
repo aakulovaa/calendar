@@ -1,6 +1,6 @@
 package org.liga.aakulova.domain;
 
-public enum Date {
+public enum Day {
     MONDAY(1, "Пн"),
     TUESDAY(2,"Вт"),
     WEDNESDAY(3,"Ср"),
@@ -12,7 +12,7 @@ public enum Date {
     private final int dayNumber;
     private final String dayName;
 
-    Date(int dayNumber, String dayName) {
+    Day(int dayNumber, String dayName) {
         this.dayNumber = dayNumber;
         this.dayName = dayName;
     }
