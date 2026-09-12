@@ -23,4 +23,12 @@ public class CalendarCalculator implements CalendarInterface {
 
         return Day.values()[dayOfWeek.getValue() - 1];
     }
+
+    @Override
+    public String getDayOfWeek(int day, int month, int year) {
+        YearMonth yearMonth = YearMonth.of(year, month);
+        DayOfWeek dayOfWeek = yearMonth.atDay(day).getDayOfWeek();
+
+        return Day.values()[dayOfWeek.getValue() - 1].getDayName();
+    }
 }

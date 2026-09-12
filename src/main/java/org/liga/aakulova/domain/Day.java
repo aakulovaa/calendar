@@ -1,13 +1,13 @@
 package org.liga.aakulova.domain;
 
 public enum Day {
-    MONDAY(1, "Пн"),
-    TUESDAY(2,"Вт"),
-    WEDNESDAY(3,"Ср"),
-    THURSDAY(4,"Чт"),
-    FRIDAY(5,"Пт"),
-    SATURDAY(6,"Сб"),
-    SUNDAY(7,"Вс");
+    MONDAY(1, "Понедельник"),
+    TUESDAY(2,"Вторник"),
+    WEDNESDAY(3,"Среда"),
+    THURSDAY(4,"Четверг"),
+    FRIDAY(5,"Пятница"),
+    SATURDAY(6,"Суббота"),
+    SUNDAY(7,"Воскресенье");
 
     private final int dayNumber;
     private final String dayName;

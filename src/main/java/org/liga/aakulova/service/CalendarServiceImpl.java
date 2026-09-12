@@ -27,4 +27,9 @@ public class CalendarServiceImpl implements CalendarService{
         }
         return new Calendar(year, months);
     }
+
+    @Override
+    public String getDayOfWeek(int day, int month, int year) {
+        return calendar.getDayOfWeek(day,month,year);
+    }
 }

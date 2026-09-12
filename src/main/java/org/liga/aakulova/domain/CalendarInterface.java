@@ -6,4 +6,5 @@ public interface CalendarInterface {
 
     Day getFirstDayOfWeek(int year, Month month);
 
+    String getDayOfWeek(int day, int month, int year);
 }
