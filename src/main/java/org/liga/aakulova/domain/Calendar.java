@@ -8,6 +8,12 @@ public class Calendar {
 
 
     public Calendar(int year, List<MonthOfCalendar> months) {
+        if (year < 1600) {
+            throw new IllegalArgumentException("Год должен быть после 1600");
+        }
+        if (months == null || months.size()!=12){
+            throw new IllegalArgumentException("Год должен содержать 12 месяцев");
+        }
         this.year = year;
         this.months = months;
     }
