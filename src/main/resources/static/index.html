@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Календарь</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+      <h1>Григорианский календарь</h1>
+
+      <div class="menu">
+
+        <button id="calendarModeButton">
+          Показать календарь выбранного года
+        </button>
+
+        <button id="dayModeButton">
+          Определить день недели по дате
+        </button>
+      </div>
+
+      <section id="calendarSection" class="hidden">
+
+        <h2>Введите год: </h2>
+
+        <div class="input-row">
+
+          <input
+                  id="yearInput"
+                  type="number"
+                  min="1600"
+                  placeholder="1600"
+          >
+
+          <button id="calendarButton">
+            Показать календарь
+          </button>
+
+        </div>
+
+        <div id="calendarResult"></div>
+
+      </section>
+
+      <section id="daySection" class="hidden">
+
+        <h2>Введите дату: </h2>
+
+        <div class="input-row">
+
+          <input
+                  id="dayInput"
+                  type="number"
+                  min="1"
+                  max="31"
+                  placeholder="День"
+          >
+
+          <input
+                  id="monthInput"
+                  type="number"
+                  min="1"
+                  max="12"
+                  placeholder="Месяц"
+          >
+
+          <input
+                  id="dateYearInput"
+                  type="number"
+                  min="1600"
+                  placeholder="Год"
+          >
+
+          <button id="dayButton">
+            Определить
+          </button>
+
+        </div>
+
+        <div id="dayResult"></div>
+
+      </section>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
