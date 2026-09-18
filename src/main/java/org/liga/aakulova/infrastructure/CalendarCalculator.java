@@ -1,14 +1,16 @@
 package org.liga.aakulova.infrastructure;
 
-import org.liga.aakulova.domain.CalendarInterface;
 import org.liga.aakulova.domain.Day;
 import org.liga.aakulova.domain.Month;
 import org.liga.aakulova.domain.MonthOfCalendar;
+import org.liga.aakulova.service.CalendarInterface;
+import org.springframework.stereotype.Component;
 
 import java.time.DayOfWeek;
 import java.time.Year;
 import java.time.YearMonth;
 
+@Component
 public class CalendarCalculator implements CalendarInterface {
 
     @Override

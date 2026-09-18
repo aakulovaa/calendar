@@ -1,5 +1,8 @@
-package org.liga.aakulova.domain;
+package org.liga.aakulova.service;
 
+
+import org.liga.aakulova.domain.Day;
+import org.liga.aakulova.domain.Month;
 
 public interface CalendarInterface {
     int getDaysCount(int year, Month month);
