@@ -24,4 +24,13 @@ public enum Day {
     public String getDayName() {
         return dayName;
     }
+
+    public static Day getDayOfWeekByNumber(int dayNumber){
+        for(Day day : values()){
+            if (day.dayNumber == dayNumber){
+                return day;
+            }
+        }
+        throw new IllegalArgumentException("День месяца должен быть корректен!");
+    }
 }

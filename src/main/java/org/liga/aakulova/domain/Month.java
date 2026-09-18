@@ -30,4 +30,14 @@ public enum Month {
     public String getMonthName() {
         return monthName;
     }
+
+    public static Month getMonthByNumber(int monthNumber){
+        for (Month month : values()){
+            if (month.monthNumber == monthNumber){
+                return month;
+            }
+        }
+
+        throw new IllegalArgumentException("Номер месяца должен входить в диапазон от 1 до 12!");
+    }
 }

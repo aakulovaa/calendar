@@ -31,22 +31,27 @@ public class CalendarServiceImpl implements CalendarService{
                 continue;
             }
 
-            List<MonthOfCalendar> months = createMonth(year);
+            List<MonthOfCalendar> months = createMonths(year);
 
             uniqueCalendars.put(typeOfYear, months);
         }
         return  Map.copyOf(uniqueCalendars);
     }
 
-    private List<MonthOfCalendar> createMonth(int year) {
+    private List<MonthOfCalendar> createMonths(int year) {
         List<MonthOfCalendar> months = new ArrayList<>();
 
         for (Month month : Month.values()){
-            int countOfDays = calendar.getDaysCount(year, month);
-            Day firstDay = calendar.getFirstDayOfWeek(year, month);
-            months.add(new MonthOfCalendar(firstDay, month, countOfDays));
+            months.add(createMonth(year,month));
         }
         return List.copyOf(months);
+    }
+
+    private MonthOfCalendar createMonth(int year, Month month) {
+        int countOfDays = calendar.getDaysCount(year, month);
+        Day firstDay = calendar.getFirstDayOfWeek(year, month);
+
+        return new MonthOfCalendar(firstDay,month,countOfDays);
     }
 
     @Override
@@ -58,9 +63,8 @@ public class CalendarServiceImpl implements CalendarService{
 
     private TypeOfYear getTypeOfYear(int year) {
         Day firstDay = calendar.getFirstDayOfWeek(year, Month.JANUARY);
-        int countDaysOfFebruary = calendar.getDaysCount(year, Month.FEBRUARY);
 
-        boolean isLeapYear = countDaysOfFebruary == 29;
+        boolean isLeapYear = calendar.isLeapYear(year);
 
         return  new TypeOfYear(firstDay, isLeapYear);
     }

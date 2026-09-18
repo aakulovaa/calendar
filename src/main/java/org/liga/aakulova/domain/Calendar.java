@@ -8,9 +8,6 @@ public class Calendar {
 
 
     public Calendar(int year, List<MonthOfCalendar> months) {
-        if (year < 1600) {
-            throw new IllegalArgumentException("Год должен быть после 1600");
-        }
         if (months == null || months.size()!=12){
             throw new IllegalArgumentException("Год должен содержать 12 месяцев");
         }
@@ -24,5 +21,27 @@ public class Calendar {
 
     public List<MonthOfCalendar> getMonths() {
         return months;
+    }
+
+    public MonthOfCalendar getMonth(Month month){
+        if (month == null){
+            throw new IllegalArgumentException("Месяц не может быть null");
+        }
+
+        for (MonthOfCalendar monthOfCalendar : months){
+            if (monthOfCalendar.getMonth() == month){
+                return monthOfCalendar;
+            }
+        }
+
+        throw new IllegalArgumentException("Месяц не найден: " + month);
+    }
+
+    public int getDaysCount(Month month){
+        return getMonth(month).getCountDays();
+    }
+
+    public Day getFirstDay(Month month){
+        return getMonth(month).getDay();
     }
 }

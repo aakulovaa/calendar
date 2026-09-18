@@ -16,6 +16,12 @@ public class Main {
         CalendarService calendarService = new CalendarServiceImpl(new CalendarCalculator());
         CalendarDisplayInterface displayCalendar = new CalendarDisplay();
 
+        System.out.println(
+                "Количество уникальных календарей: "
+                        + calendarService
+                        .getUniqueCalendarCount()
+        );
+
         boolean isRunning = true;
         while (isRunning){
             System.out.println();
@@ -28,29 +34,30 @@ public class Main {
             if (choice == 1 || choice == 2){
                 System.out.println("Введите год: ");
                 year = scanner.nextInt();
-
-                if (year < 1600){
-                    System.out.println("Вводимый год должен быть после 1600!\n");
-                    continue;
-                }
             }
 
-            switch (choice){
+            try {
 
-                case 1 -> displayCalendar.display(calendarService.createCalendar(year));
-                case 2 -> {
-                    System.out.println("Введите день: ");
-                    int day = scanner.nextInt();
-                    System.out.println("Введите месяц (число от 1 до 12): ");
-                    int month = scanner.nextInt();
+                switch (choice) {
 
-                    String dayOfWeek = calendarService.getDayOfWeek(day,month,year);
-                    System.out.printf("Дате %02d/%02d/%04d соответствует день недели: %s%n", day, month, year, dayOfWeek );
+                    case 1 -> displayCalendar.display(calendarService.createCalendar(year));
+                    case 2 -> {
+                        System.out.println("Введите день: ");
+                        int day = scanner.nextInt();
+                        System.out.println("Введите месяц (число от 1 до 12): ");
+                        int month = scanner.nextInt();
+
+                        String dayOfWeek = calendarService.getDayOfWeek(day, month, year);
+                        System.out.printf("Дате %02d/%02d/%04d соответствует день недели: %s%n", day, month, year, dayOfWeek);
+                    }
+                    case 3 -> {
+                        System.out.println("Программа завершена");
+                        isRunning = false;
+                    }
+                    default -> System.out.println("Некорректная команда!");
                 }
-                case 3 -> {
-                    System.out.println("Программа завершена");
-                    isRunning = false;
-                }
+            } catch (IllegalArgumentException e){
+                System.out.println("Ошибка: " + e.getMessage());
             }
         }
         scanner.close();
