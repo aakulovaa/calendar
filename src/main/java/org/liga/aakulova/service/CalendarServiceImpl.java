@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс-реализация сервиса
+ */
 @Service
 public class CalendarServiceImpl implements CalendarService{
 
@@ -15,14 +18,23 @@ public class CalendarServiceImpl implements CalendarService{
     private static final int GREGORIAN_CYCLE = 400;
 
     private final CalendarInterface calendar;
-    
+
+    /*** Поле для хранения уникальных календарей*/
     private final Map<TypeOfYear, List<MonthOfCalendar>> uniqueCalendars;
 
+    /**
+     * Конструктор класс
+     * @param calendar - класс, отвечающий за расчеты календаря
+     */
     public CalendarServiceImpl(CalendarInterface calendar) {
         this.calendar = calendar;
         this.uniqueCalendars = createUniqueCalendars();
     }
 
+    /**
+     * Метод создания уникальных календарей (исходя из високосности)
+     * @return уникальные календари
+     */
     private Map<TypeOfYear, List<MonthOfCalendar>> createUniqueCalendars() {
         Map<TypeOfYear, List<MonthOfCalendar>> uniqueCalendars = new HashMap<>();
 
@@ -40,6 +52,11 @@ public class CalendarServiceImpl implements CalendarService{
         return  Map.copyOf(uniqueCalendars);
     }
 
+    /**
+     * Метод создания списка месяцев полученного года
+     * @param year - год
+     * @return список из 12 месяцев
+     */
     private List<MonthOfCalendar> createMonths(int year) {
         List<MonthOfCalendar> months = new ArrayList<>();
 
@@ -49,6 +66,12 @@ public class CalendarServiceImpl implements CalendarService{
         return List.copyOf(months);
     }
 
+    /**
+     * Метод создания месяца календаря
+     * @param year - год
+     * @param month - месяц
+     * @return конкретный месяц календаря
+     */
     private MonthOfCalendar createMonth(int year, Month month) {
         int countOfDays = calendar.getDaysCount(year, month);
         Day firstDay = calendar.getFirstDayOfWeek(year, month);
@@ -65,6 +88,11 @@ public class CalendarServiceImpl implements CalendarService{
         return new Calendar(year, months);
     }
 
+    /**
+     * Метод определения типа календаря по году и високосности
+     * @param year - получаемый год
+     * @return тип года
+     */
     private TypeOfYear getTypeOfYear(int year) {
         Day firstDay = calendar.getFirstDayOfWeek(year, Month.JANUARY);
 
@@ -79,6 +107,10 @@ public class CalendarServiceImpl implements CalendarService{
         return calendar.getDayOfWeek(day,month,year);
     }
 
+    /**
+     * Метод проверки на корректность введенного года
+     * @param year - год
+     */
     private void checkCorrectYear(int year){
         if(year < FIRST_YEAR){
             throw new IllegalArgumentException("Год должен быть после 1600!");

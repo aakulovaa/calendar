@@ -10,6 +10,9 @@ import java.time.DayOfWeek;
 import java.time.Year;
 import java.time.YearMonth;
 
+/**
+ * Класс для расчетов построения календаря
+ */
 @Component
 public class CalendarCalculator implements CalendarInterface {
 

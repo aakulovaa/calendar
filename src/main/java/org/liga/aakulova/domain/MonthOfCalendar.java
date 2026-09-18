@@ -1,10 +1,19 @@
 package org.liga.aakulova.domain;
 
+/**
+ * Класс, отвечающий за отображения месяца в календаре
+ */
 public class MonthOfCalendar {
     private final Day day;
     private final Month month;
     private final int countDays;
 
+    /**
+     * Конструктор класса
+     * @param day - поле, отвечающее за первый день месяца
+     * @param month - поле, отвечающее за месяц года
+     * @param countDays - поле, отвечающее за количество дней в месяце
+     */
     public MonthOfCalendar(Day day, Month month, int countDays) {
         if (month == null) {
             throw new IllegalArgumentException("Месяц не может быть null");
@@ -35,10 +44,20 @@ public class MonthOfCalendar {
         return countDays;
     }
 
+    /**
+     * Метод, отвечающий за проверку корректности вводимого дня
+     * @param enterDay - поле, хранящее день
+     * @return true, если день >= 1 и <= количеству дней соответствующего месяца, false - иначе
+     */
     public boolean isCorrectDay(int enterDay){
         return enterDay >= 1 && enterDay <= countDays;
     }
 
+    /**
+     * Метод, определяющий какому дню недели соответствует первый день месяца
+     * @param dayOfMonth - номер дня месяца
+     * @return номер дня недели (от 1 до 7)
+     */
     public int getDayOfWeek(int dayOfMonth){
         if(!isCorrectDay(dayOfMonth)){
             throw new IllegalArgumentException("Введен некорректный день!");

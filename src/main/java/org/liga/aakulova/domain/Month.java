@@ -1,5 +1,8 @@
 package org.liga.aakulova.domain;
 
+/**
+ * Класс-перечисление месяцев
+ */
 public enum Month {
     JANUARY (1, "Январь"),
     FEBRUARY (2, "Февраль"),
@@ -18,6 +21,11 @@ public enum Month {
     private final String monthName;
 
 
+    /**
+     * Конструктор класса
+     * @param monthNumber - поле, отвечающее за порядковый номер месяца
+     * @param monthName - поле, отвечающее за название месяца
+     */
     Month(int monthNumber, String monthName) {
         this.monthNumber = monthNumber;
         this.monthName = monthName;
@@ -31,6 +39,11 @@ public enum Month {
         return monthName;
     }
 
+    /**
+     * Метод получения месяца по его порядковому номеру
+     * @param monthNumber - порядковый номер месяца
+     * @return месяц, соответствующий порядковому месяцу
+     */
     public static Month getMonthByNumber(int monthNumber){
         for (Month month : values()){
             if (month.monthNumber == monthNumber){

@@ -1,5 +1,8 @@
 package org.liga.aakulova.domain;
 
+/**
+ * Класс-перечисление дней недели
+ */
 public enum Day {
     MONDAY(1, "Понедельник"),
     TUESDAY(2,"Вторник"),
@@ -12,6 +15,11 @@ public enum Day {
     private final int dayNumber;
     private final String dayName;
 
+    /**
+     * Конструктор класса
+     * @param dayNumber - поле, отвечающее за порядковый номер дня недели
+     * @param dayName - поле, отвечающее за название дня недели
+     */
     Day(int dayNumber, String dayName) {
         this.dayNumber = dayNumber;
         this.dayName = dayName;
@@ -25,6 +33,11 @@ public enum Day {
         return dayName;
     }
 
+    /**
+     * Метод получения дня недели по порядковому номеру дня
+     * @param dayNumber - день недели от 1 до 7
+     * @return день недели, соответствующий порядковому номеру
+     */
     public static Day getDayOfWeekByNumber(int dayNumber){
         for(Day day : values()){
             if (day.dayNumber == dayNumber){
