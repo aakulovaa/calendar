@@ -58,6 +58,8 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public Calendar createCalendar(int year) {
+        checkCorrectYear(year);
+
         TypeOfYear typeOfYear = getTypeOfYear(year);
         List<MonthOfCalendar> months = uniqueCalendars.get(typeOfYear);
         return new Calendar(year, months);
@@ -73,11 +75,13 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public String getDayOfWeek(int day, int month, int year) {
+        checkCorrectYear(year);
         return calendar.getDayOfWeek(day,month,year);
     }
 
-    @Override
-    public int getUniqueCalendarCount() {
-        return uniqueCalendars.size();
+    private void checkCorrectYear(int year){
+        if(year < FIRST_YEAR){
+            throw new IllegalArgumentException("Год должен быть после 1600!");
+        }
     }
 }

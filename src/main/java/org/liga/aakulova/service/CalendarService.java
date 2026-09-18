@@ -6,6 +6,4 @@ public interface CalendarService {
     Calendar createCalendar(int year);
 
     String getDayOfWeek(int day, int month, int year);
-
-    int getUniqueCalendarCount();
 }
