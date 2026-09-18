@@ -15,7 +15,7 @@ public class Calendar {
             throw new IllegalArgumentException("Год должен содержать 12 месяцев");
         }
         this.year = year;
-        this.months = months;
+        this.months = List.copyOf(months);
     }
 
     public int getYear() {
