@@ -28,13 +28,10 @@ public class Calendar {
             throw new IllegalArgumentException("Месяц не может быть null");
         }
 
-        for (MonthOfCalendar monthOfCalendar : months){
-            if (monthOfCalendar.getMonth() == month){
-                return monthOfCalendar;
-            }
-        }
-
-        throw new IllegalArgumentException("Месяц не найден: " + month);
+        return months.stream()
+                .filter(monthOfCalendar -> monthOfCalendar.getMonth() == month)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Месяц не найден: " + month));
     }
 
     public int getDaysCount(Month month){

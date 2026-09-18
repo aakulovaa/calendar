@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 30px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 16px;
+    background: #A6E0F8;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+button:hover {
+background: #A6F8D1
+}
+
+
+input{
+    width: 150px;
+    padding: 14px;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+#calendarResult {
+    margin-top: 30px;
+}
+
+.calendar-year {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.month {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.month h3 {
+    text-align: center;
+}
+
+.month table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.month th,
+.month td {
+    text-align: center;
+    padding: 6px;
+}
+
+.month th {
+    font-weight: bold;
+}
+
+.day-result {
+    margin-top: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.result-title {
+    text-align: center;
+}
+
+.error{
+    color: red;
+}
