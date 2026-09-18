@@ -16,12 +16,6 @@ public class Main {
         CalendarService calendarService = new CalendarServiceImpl(new CalendarCalculator());
         CalendarDisplayInterface displayCalendar = new CalendarDisplay();
 
-        System.out.println(
-                "Количество уникальных календарей: "
-                        + calendarService
-                        .getUniqueCalendarCount()
-        );
-
         boolean isRunning = true;
         while (isRunning){
             System.out.println();
