@@ -2,11 +2,19 @@ package org.liga.aakulova.domain;
 
 import java.util.List;
 
+/**
+ * Класс календаря нужного года
+ */
 public class Calendar {
     private final int year;
     private final List<MonthOfCalendar> months;
 
 
+    /**
+     * Конструктор класса
+     * @param year - год календаря
+     * @param months - список месяцев нужного года
+     */
     public Calendar(int year, List<MonthOfCalendar> months) {
         if (months == null || months.size()!=12){
             throw new IllegalArgumentException("Год должен содержать 12 месяцев");
@@ -23,6 +31,11 @@ public class Calendar {
         return months;
     }
 
+    /**
+     * Метод нахождения месяца в календаре
+     * @param month - искомый месяц
+     * @return объект месяца календаря
+     */
     public MonthOfCalendar getMonth(Month month){
         if (month == null){
             throw new IllegalArgumentException("Месяц не может быть null");
@@ -32,13 +45,5 @@ public class Calendar {
                 .filter(monthOfCalendar -> monthOfCalendar.getMonth() == month)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Месяц не найден: " + month));
-    }
-
-    public int getDaysCount(Month month){
-        return getMonth(month).getCountDays();
-    }
-
-    public Day getFirstDay(Month month){
-        return getMonth(month).getDay();
     }
 }

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * REST-контроллер для работы с календарем
+ */
 @RestController
 @RequestMapping("/api/calendar")
 public class CalendarController {
@@ -23,6 +26,11 @@ public class CalendarController {
         this.calendarService = calendarService;
     }
 
+    /**
+     * Метод для календаря указанного года
+     * @param year - получаемый с сервера год
+     * @return календарь указанного года
+     */
     @GetMapping("/{year}")
     public CalendarDTO getCalendar(
             @PathVariable int year
@@ -43,6 +51,13 @@ public class CalendarController {
         );
     }
 
+    /**
+     * Метод для отображения дня недели по дате
+     * @param day - день, получаемый с сервера
+     * @param month - месяц, получаемый с сервера
+     * @param year - год, получаемый с сервера
+     * @return день недели полученной даты
+     */
     @GetMapping("/day-of-week")
     public DayDTO getDayOfWeek(@RequestParam int day, @RequestParam int month, @RequestParam int year){
         String dayOfWeek = calendarService.getDayOfWeek(day, month, year);
@@ -51,6 +66,11 @@ public class CalendarController {
         return new DayDTO(date, dayOfWeek);
     }
 
+    /**
+     * Метод для создания месяцев с разбивкой чисел по дням недели
+     * @param month - месяц календаря
+     * @return DTO месяца
+     */
     private MonthDTO createMonthDTO(MonthOfCalendar month) {
         List<List<String>> daysByWeeks = new ArrayList<>();
 
