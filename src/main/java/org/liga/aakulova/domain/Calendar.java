@@ -9,7 +9,6 @@ public class Calendar {
     private final int year;
     private final List<MonthOfCalendar> months;
 
-
     /**
      * Конструктор класса
      * @param year - год календаря
@@ -37,10 +36,6 @@ public class Calendar {
      * @return объект месяца календаря
      */
     public MonthOfCalendar getMonth(Month month){
-        if (month == null){
-            throw new IllegalArgumentException("Месяц не может быть null");
-        }
-
         return months.stream()
                 .filter(monthOfCalendar -> monthOfCalendar.getMonth() == month)
                 .findFirst()
