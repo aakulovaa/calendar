@@ -90,19 +90,17 @@ public class CalendarController {
             );
 
             if (currentWeek.size() == 7) {
-
                 daysByWeeks.add(currentWeek);
-
-                currentWeek =
-                        new ArrayList<>();
+                currentWeek = new ArrayList<>();
             }
         }
+        if (!currentWeek.isEmpty()) {
+            while (currentWeek.size() < 7) {
+                currentWeek.add("");
+            }
 
-        while (currentWeek.size() < 7) {
-            currentWeek.add("");
+            daysByWeeks.add(currentWeek);
         }
-
-        daysByWeeks.add(currentWeek);
 
         return new MonthDTO(month.getMonth().getMonthName(), daysByWeeks);
     }

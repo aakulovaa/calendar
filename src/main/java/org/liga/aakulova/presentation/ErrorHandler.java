@@ -35,14 +35,14 @@ public class ErrorHandler {
      * @return текст ошибки, общий для такого поведения
      */
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Map<String, String> handleException(
             Exception exception
     ) {
 
         return Map.of(
                 "message",
-                "Некорректные данные"
+                "Ошибка!"
         );
     }
 }

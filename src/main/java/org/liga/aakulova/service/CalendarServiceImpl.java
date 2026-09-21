@@ -85,6 +85,9 @@ public class CalendarServiceImpl implements CalendarService{
 
         TypeOfYear typeOfYear = getTypeOfYear(year);
         List<MonthOfCalendar> months = uniqueCalendars.get(typeOfYear);
+        if (months == null){
+            throw new IllegalStateException("Не найден тип структуры календаря");
+        }
         return new Calendar(year, months);
     }
 
