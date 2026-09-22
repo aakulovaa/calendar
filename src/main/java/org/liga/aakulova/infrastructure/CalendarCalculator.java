@@ -2,7 +2,6 @@ package org.liga.aakulova.infrastructure;
 
 import org.liga.aakulova.domain.Day;
 import org.liga.aakulova.domain.Month;
-import org.liga.aakulova.domain.MonthOfCalendar;
 import org.liga.aakulova.service.CalendarInterface;
 import org.springframework.stereotype.Component;
 
@@ -29,20 +28,6 @@ public class CalendarCalculator implements CalendarInterface {
         DayOfWeek dayOfWeek = yearMonth.atDay(1).getDayOfWeek();
 
         return Day.getDayOfWeekByNumber(dayOfWeek.getValue());
-    }
-
-    @Override
-    public String getDayOfWeek(int day, int month, int year) {
-        Month sealedMonth = Month.getMonthByNumber(month);
-        int countOfDays = getDaysCount(year, sealedMonth);
-
-        Day firstDay = getFirstDayOfWeek(year,sealedMonth);
-        MonthOfCalendar monthOfCalendar = new MonthOfCalendar(firstDay,sealedMonth,countOfDays);
-
-        int dayNumber = monthOfCalendar.getDayOfWeek(day);
-
-        Day resultDay = Day.getDayOfWeekByNumber(dayNumber);
-        return resultDay.getDayName();
     }
 
     @Override

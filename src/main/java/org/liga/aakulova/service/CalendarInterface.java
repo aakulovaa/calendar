@@ -25,15 +25,6 @@ public interface CalendarInterface {
     Day getFirstDayOfWeek(int year, Month month);
 
     /**
-     * Метод получения дня недели для введенной даты
-     * @param day - день (число)
-     * @param month - месяц
-     * @param year - год
-     * @return день недели указанной даты
-     */
-    String getDayOfWeek(int day, int month, int year);
-
-    /**
      * Метод проверки года на високосность
      * @param year - год
      * @return вернет true, если год високосный, false - иначе

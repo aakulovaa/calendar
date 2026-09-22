@@ -17,18 +17,50 @@ public class CalendarServiceImpl implements CalendarService{
     private static final int FIRST_YEAR = 1600;
     private static final int GREGORIAN_CYCLE = 400;
 
-    private final CalendarInterface calendar;
+    private final CalendarInterface calendarCalculator;
 
     /*** Поле для хранения уникальных календарей*/
     private final Map<TypeOfYear, List<MonthOfCalendar>> uniqueCalendars;
 
     /**
      * Конструктор класс
-     * @param calendar - класс, отвечающий за расчеты календаря
+     * @param calendarCalculator - класс, отвечающий за расчеты календаря
      */
-    public CalendarServiceImpl(CalendarInterface calendar) {
-        this.calendar = calendar;
+    public CalendarServiceImpl(CalendarInterface calendarCalculator) {
+        this.calendarCalculator = calendarCalculator;
         this.uniqueCalendars = createUniqueCalendars();
+    }
+
+    @Override
+    public Calendar createCalendar(int year) {
+        checkCorrectYear(year);
+
+        TypeOfYear typeOfYear = getTypeOfYear(year);
+        List<MonthOfCalendar> months = uniqueCalendars.get(typeOfYear);
+        if (months == null){
+            throw new IllegalStateException("Не найден тип структуры календаря");
+        }
+        return new Calendar(year, months);
+    }
+
+    @Override
+    public String getDayOfWeek(int day, int month, int year) {
+        checkCorrectYear(year);
+        Calendar calendar = createCalendar(year);
+        Month sealedMonth = Month.getMonthByNumber(month);
+        Day dayOfWeek = calendar.getDayOfWeek(day,sealedMonth);
+
+        return dayOfWeek.getDayName();
+    }
+
+    /**
+     * Метод проверки на корректность введенного года
+     * @param year - год
+     */
+    private void checkCorrectYear(int year){
+        if(year < FIRST_YEAR){
+            throw new IllegalArgumentException("Год должен быть после 1600!");
+        }
     }
 
     /**
@@ -73,19 +105,10 @@ public class CalendarServiceImpl implements CalendarService{
      * @return конкретный месяц календаря
      */
     private MonthOfCalendar createMonth(int year, Month month) {
-        int countOfDays = calendar.getDaysCount(year, month);
-        Day firstDay = calendar.getFirstDayOfWeek(year, month);
+        int countOfDays = calendarCalculator.getDaysCount(year, month);
+        Day firstDay = calendarCalculator.getFirstDayOfWeek(year, month);
 
         return new MonthOfCalendar(firstDay,month,countOfDays);
-    }
-
-    @Override
-    public Calendar createCalendar(int year) {
-        checkCorrectYear(year);
-
-        TypeOfYear typeOfYear = getTypeOfYear(year);
-        List<MonthOfCalendar> months = uniqueCalendars.get(typeOfYear);
-        return new Calendar(year, months);
     }
 
     /**
@@ -94,26 +117,11 @@ public class CalendarServiceImpl implements CalendarService{
      * @return тип года
      */
     private TypeOfYear getTypeOfYear(int year) {
-        Day firstDay = calendar.getFirstDayOfWeek(year, Month.JANUARY);
+        Day firstDay = calendarCalculator.getFirstDayOfWeek(year, Month.JANUARY);
 
-        boolean isLeapYear = calendar.isLeapYear(year);
+        boolean isLeapYear = calendarCalculator.isLeapYear(year);
 
         return  new TypeOfYear(firstDay, isLeapYear);
     }
 
-    @Override
-    public String getDayOfWeek(int day, int month, int year) {
-        checkCorrectYear(year);
-        return calendar.getDayOfWeek(day,month,year);
-    }
-
-    /**
-     * Метод проверки на корректность введенного года
-     * @param year - год
-     */
-    private void checkCorrectYear(int year){
-        if(year < FIRST_YEAR){
-            throw new IllegalArgumentException("Год должен быть после 1600!");
-        }
-    }
 }

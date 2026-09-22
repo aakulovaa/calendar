@@ -58,11 +58,13 @@ public class MonthOfCalendar {
      * @param dayOfMonth - номер дня месяца
      * @return номер дня недели (от 1 до 7)
      */
-    public int getDayOfWeek(int dayOfMonth){
+    public Day getDayOfWeek(int dayOfMonth){
         if(!isCorrectDay(dayOfMonth)){
             throw new IllegalArgumentException("Введен некорректный день!");
         }
 
-        return (day.getDayNumber() + dayOfMonth - 2) % 7 + 1;
+        int dayNumber = (day.getDayNumber() + dayOfMonth - 2) % 7 + 1;
+
+        return Day.getDayOfWeekByNumber(dayNumber);
     }
 }

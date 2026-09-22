@@ -9,7 +9,6 @@ public class Calendar {
     private final int year;
     private final List<MonthOfCalendar> months;
 
-
     /**
      * Конструктор класса
      * @param year - год календаря
@@ -37,13 +36,28 @@ public class Calendar {
      * @return объект месяца календаря
      */
     public MonthOfCalendar getMonth(Month month){
-        if (month == null){
-            throw new IllegalArgumentException("Месяц не может быть null");
-        }
-
         return months.stream()
                 .filter(monthOfCalendar -> monthOfCalendar.getMonth() == month)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Месяц не найден: " + month));
+    }
+
+    /**
+     * Метод получения первого дня недели в указанном месяце
+     * @param month - месяц
+     * @return день недели месяца
+     */
+    public Day getFirstDayOfWeek(Month month){
+        return getMonth(month).getDay();
+    }
+
+    /**
+     * Метод получения дня недели указанного дня в месяце
+     * @param day - нужный нам день
+     * @param month - нужного месяца
+     * @return день недели
+     */
+    public Day getDayOfWeek(int day, Month month){
+        return getMonth(month).getDayOfWeek(day);
     }
 }

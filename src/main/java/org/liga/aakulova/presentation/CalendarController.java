@@ -32,23 +32,17 @@ public class CalendarController {
      * @return календарь указанного года
      */
     @GetMapping("/{year}")
-    public CalendarDTO getCalendar(
-            @PathVariable int year
-    ) {
+    public CalendarDTO getCalendar(@PathVariable int year) {
 
-        Calendar calendar =
-                calendarService.createCalendar(year);
+        Calendar calendar = calendarService.createCalendar(year);
 
         List<MonthDTO> months =
                 calendar.getMonths()
                         .stream()
-                        .map(this::createMonthDTO)
+                        .map(month -> createMonthDTO(calendar,month))
                         .toList();
 
-        return new CalendarDTO(
-                year,
-                months
-        );
+        return new CalendarDTO(calendar.getYear(), months);
     }
 
     /**
@@ -68,17 +62,18 @@ public class CalendarController {
 
     /**
      * Метод для создания месяцев с разбивкой чисел по дням недели
+     * @param calendar - календарь
      * @param month - месяц календаря
      * @return DTO месяца
      */
-    private MonthDTO createMonthDTO(MonthOfCalendar month) {
+    private MonthDTO createMonthDTO(Calendar calendar, MonthOfCalendar month) {
         List<List<String>> daysByWeeks = new ArrayList<>();
 
         List<String> currentWeek = new ArrayList<>();
 
-        Day firstDay = month.getDay();
+        Day firstDay = calendar.getFirstDayOfWeek(month.getMonth());
 
-        int firstDayPosition = firstDay.getDayNumber() - 1;
+        int firstDayPosition = firstDay.getDayNumber()-1;
 
         for (int i = 0; i < firstDayPosition; i++) {
             currentWeek.add("");
@@ -90,19 +85,17 @@ public class CalendarController {
             );
 
             if (currentWeek.size() == 7) {
-
                 daysByWeeks.add(currentWeek);
-
-                currentWeek =
-                        new ArrayList<>();
+                currentWeek = new ArrayList<>();
             }
         }
+        if (!currentWeek.isEmpty()) {
+            while (currentWeek.size() < 7) {
+                currentWeek.add("");
+            }
 
-        while (currentWeek.size() < 7) {
-            currentWeek.add("");
+            daysByWeeks.add(currentWeek);
         }
-
-        daysByWeeks.add(currentWeek);
 
         return new MonthDTO(month.getMonth().getMonthName(), daysByWeeks);
     }
