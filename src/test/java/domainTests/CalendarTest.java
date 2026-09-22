@@ -15,15 +15,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Класс для тестирования domain/Calendar
  */
 public class CalendarTest {
+
+    List<MonthOfCalendar> months = createMonths();
+
+    Calendar calendar = new Calendar(2026, months);
+
     /**
      * Тест корректного создания календаря
      */
     @Test
     void testCreateCalendar(){
-        List<MonthOfCalendar> months = createMonths();
-
-        Calendar calendar = new Calendar(2026, months);
-
         assertEquals(2026, calendar.getYear());
         assertEquals(12, calendar.getMonths().size());
     }
@@ -34,6 +35,42 @@ public class CalendarTest {
     @Test
     void testExceptionCreateCalendar(){
         assertThrows(IllegalArgumentException.class, ()-> new Calendar(2026, List.of()));
+    }
+
+    /**
+     * Тест получения конкретного месяца из календаря
+     */
+    @Test
+    void testGetMonth(){
+        MonthOfCalendar may = calendar.getMonth(Month.MAY);
+        assertEquals(Month.MAY, may.getMonth());
+    }
+
+    /**
+     * Тест выбрасывания ошибки
+     */
+    @Test
+    void testExceptionGetMonth(){
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()-> calendar.getMonth(null));
+        assertEquals("Месяц не найден: " + null, exception.getMessage());
+    }
+
+    /**
+     * Тест получения дня недели первого дня месяца
+     */
+    @Test
+    void testGetFirstDayOfWeek(){
+        assertEquals(Day.TUESDAY, calendar.getFirstDayOfWeek(Month.SEPTEMBER));
+        assertEquals(Day.SUNDAY, calendar.getFirstDayOfWeek(Month.MARCH));
+    }
+
+    /**
+     * Тест получения дня недели указанного дня месяца
+     */
+    @Test
+    void testGetDayOfWeek(){
+        assertEquals(Day.WEDNESDAY, calendar.getDayOfWeek(15,Month.APRIL));
+        assertEquals(Day.FRIDAY, calendar.getDayOfWeek(20, Month.FEBRUARY));
     }
 
     /**

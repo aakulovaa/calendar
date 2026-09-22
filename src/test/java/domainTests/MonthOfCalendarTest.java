@@ -60,9 +60,9 @@ public class MonthOfCalendarTest {
     void testGetDayOfWeek(){
         MonthOfCalendar monthOfCalendar = new MonthOfCalendar(Day.THURSDAY, Month.JANUARY, 31);
 
-        assertEquals(4, monthOfCalendar.getDayOfWeek(1));
-        assertEquals(7, monthOfCalendar.getDayOfWeek(11));
-        assertEquals(5, monthOfCalendar.getDayOfWeek(23));
+        assertEquals(Day.THURSDAY, monthOfCalendar.getDayOfWeek(1));
+        assertEquals(Day.SUNDAY, monthOfCalendar.getDayOfWeek(11));
+        assertEquals(Day.FRIDAY, monthOfCalendar.getDayOfWeek(23));
     }
 
     /**
