@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class CalendarTest {
 
-    List<MonthOfCalendar> months = createMonths();
+    private final List<MonthOfCalendar> months = createMonths();
 
-    Calendar calendar = new Calendar(2026, months);
+    private final Calendar calendar = new Calendar(2026, months);
 
     /**
      * Тест корректного создания календаря
